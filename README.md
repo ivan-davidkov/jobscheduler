@@ -41,17 +41,16 @@ services:
     links:
       - db:mariadb
     volumes:
-      - $PWD/datastore:/opt/jobscheduler/data/scheduler/config/live
+      - datastore:/opt/jobscheduler/data/scheduler/config/live
     ports:
       - "4446:4446"
       - "40444:40444"
     environment:
-    DB_SERVER_DBMS: mariadb
-    DB_SERVER_HOST: mariadb
-    DB_SERVER_PORT: 3306
-    DB_SERVER_USER: jobscheduler
-    DB_SERVER_PASSWORD: jobscheduler
-    DB_SERVER_DATABASE: jobscheduler
+      DB_SERVER_PORT: 3306
+      DB_SERVER_HOST: mariadb
+      DB_SERVER_USER: jobscheduler
+      DB_SERVER_PASSWORD: jobscheduler
+      DB_SERVER_DATABASE: jobscheduler
 
   db:
     image: mariadb:latest
@@ -62,4 +61,7 @@ services:
       MYSQL_PASSWORD: jobscheduler
       MYSQL_ROOT_PASSWORD: scheduler
       MYSQL_DATABASE: jobscheduler
+
+volumes:
+  datastore:
 ```
