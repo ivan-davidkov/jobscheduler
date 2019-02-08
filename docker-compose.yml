@@ -1,23 +1,32 @@
-jobscheduler:
-  build: .
-#  image: floedermann/jobscheduler:latest
-  links:
-    - db:mysql
-  volumes_from:
-    - datastore
-  ports:
-    - "4446:4446"
-    - "40444:40444"
-db:
-  image: mariadb:latest
-  environment:
-    MYSQL_USER: jobscheduler
-    MYSQL_PASSWORD: jobscheduler
-    MYSQL_ROOT_PASSWORD: scheduler
-    MYSQL_DATABASE: jobscheduler
+version: "3.3"
+services:
 
-datastore:
-   image: busybox
-   command: /bin/true
-   volumes:
-     - /opt/jobscheduler/data/scheduler/config/live
+  jobscheduler:
+    build: app
+    container_name: app
+    links:
+      - db:mariadb
+    volumes:
+      - datastore:/opt/jobscheduler/data/scheduler/config/live
+    ports:
+      - "4446:4446"
+      - "40444:40444"
+    environment:
+      DB_SERVER_PORT: 3306
+      DB_SERVER_HOST: mariadb
+      DB_SERVER_USER: jobscheduler
+      DB_SERVER_PASSWORD: jobscheduler
+      DB_SERVER_DATABASE: jobscheduler
+
+  db:
+    image: mariadb:latest
+    container_name: db
+    environment:
+      MYSQL_USER: jobscheduler
+      MYSQL_USER: jobscheduler
+      MYSQL_PASSWORD: jobscheduler
+      MYSQL_ROOT_PASSWORD: scheduler
+      MYSQL_DATABASE: jobscheduler
+
+volumes:
+  datastore:

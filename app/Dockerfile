@@ -1,11 +1,11 @@
-FROM java:8-alpine
+FROM centos:latest
+
+#add packages
+RUN yum install -y java-1.8.0-openjdk-src.x86_64 which
 
 #SOS Jobscheduler download URL
-ENV SOS_JS_URL https://download.sos-berlin.com/JobScheduler.1.12/jobscheduler_linux-x64.1.12.0.tar.gz
-ENV SOS_JOC_URL https://download.sos-berlin.com/JobScheduler.1.12/joc_linux.1.12.0.tar.gz
-
-#add packages - needed for alpine
-RUN apk add --no-cache curl tar bash sed
+ENV SOS_JS_URL https://download.sos-berlin.com/JobScheduler.1.12/jobscheduler_linux-x64.1.12.8.tar.gz
+ENV SOS_JOC_URL https://download.sos-berlin.com/JobScheduler.1.12/joc_linux.1.12.8.tar.gz
 
 #download and install scheduler
 RUN curl -o /root/jobscheduler.tar.gz $SOS_JS_URL
