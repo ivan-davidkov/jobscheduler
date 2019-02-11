@@ -28,6 +28,13 @@ google-chrome http://localhost:4446 #[or firefox http://localhost:4446 ]
 ```
 login/password => root/root
 
+# Added cluster simulation
+Simulate cluster functionality by running 3 more containers with [JobScheduler Universal Agent](https://kb.sos-berlin.com/display/PKB/JobScheduler+Universal+Agent+-+Agent+Cluster) script installed
+
+# Added examples
+Added original examples to the container environment for details see [Tutorials](https://kb.sos-berlin.com/display/PKB/Tutorials) and [Example](https://kb.sos-berlin.com/display/PKB/Examples)
+
+
 # Example
 docker-compose.yml
 
@@ -35,13 +42,16 @@ docker-compose.yml
 version: "3.3"
 services:
 
-  jobscheduler:
-    build: app
-    container_name: app
+  job_joc_master:
+    build: job_joc_master
+    container_name: job_joc_master
     links:
-      - db:mariadb
+      - database:mariadb
+      - cluster_agent1
+      - cluster_agent2
+      - cluster_agent3
     volumes:
-      - datastore:/opt/jobscheduler/data/scheduler/config/live
+      - $PWD/datastore:/opt/jobscheduler/data/scheduler/config/live
     ports:
       - "4446:4446"
       - "40444:40444"
@@ -52,9 +62,9 @@ services:
       DB_SERVER_PASSWORD: jobscheduler
       DB_SERVER_DATABASE: jobscheduler
 
-  db:
+  database:
     image: mariadb:latest
-    container_name: db
+    container_name: database
     environment:
       MYSQL_USER: jobscheduler
       MYSQL_USER: jobscheduler
@@ -62,6 +72,15 @@ services:
       MYSQL_ROOT_PASSWORD: scheduler
       MYSQL_DATABASE: jobscheduler
 
-volumes:
-  datastore:
+  cluster_agent1:
+    build: cluster_agent
+    container_name: cluster_agent1
+
+  cluster_agent2:
+    build: cluster_agent
+    container_name: cluster_agent2
+
+  cluster_agent3:
+    build: cluster_agent
+    container_name: cluster_agent3
 ```
