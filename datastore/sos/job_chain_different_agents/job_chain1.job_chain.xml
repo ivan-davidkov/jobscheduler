@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<job_chain >
+    <job_chain_node  state="job1" job="job1" next_state="job2" error_state="error"/>
+
+    <job_chain_node  state="job2" job="job2" next_state="job3" error_state="error"/>
+
+    <job_chain_node  state="job3" job="job3" next_state="success" error_state="error"/>
+
+    <job_chain_node  state="success"/>
+
+    <job_chain_node  state="error"/>
+</job_chain>

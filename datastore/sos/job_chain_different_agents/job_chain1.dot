@@ -1,0 +1,99 @@
+digraph G {
+graph [
+fontsize = "8"
+rankdir = "TB"
+ratio = "auto"
+label = "job_chain1"
+]
+node   [
+fillcolor = "azure"
+fontname = "Arial"
+fontsize = "8"
+shape = "box"
+style = "rounded,filled"
+]
+"order:order1" [
+fillcolor = "chartreuse"
+label = <Order:order1<br/>>
+shape = "ellipse"
+]
+"job1" [
+label = <<b>job1</b><br/>>
+]
+"job1" [
+label = <<b>job1</b><br/><i><font point-size="8" color="blue" >job1</font></i><br/>>
+]
+"job2" [
+label = <<b>job2</b><br/>>
+]
+"error" [
+color = "blue"
+fillcolor = "orange"
+label = <<b>error</b>>
+]
+"job2" [
+label = <<b>job2</b><br/><i><font point-size="8" color="blue" >job2</font></i><br/>>
+]
+"job3" [
+label = <<b>job3</b><br/>>
+]
+"job3" [
+label = <<b>job3</b><br/><i><font point-size="8" color="blue" >job3</font></i><br/>>
+]
+"success" [
+label = <<b>success</b><br/>>
+]
+"order:order1" -> "job1"[
+arrowsize = "0.5"
+color = "black"
+constraint = "true"
+fontname = "Arial"
+fontsize = "8.0"
+style = "dashed"
+]
+"job1" -> "job2"[
+arrowsize = "0.5"
+color = "cadetblue"
+fontname = "Arial"
+fontsize = "8.0"
+label = "..next"
+]
+"job1" -> "error"[
+arrowsize = "0.5"
+color = "cadetblue"
+constraint = "true"
+fontname = "Arial"
+fontsize = "8.0"
+style = "dotted"
+]
+"job2" -> "job3"[
+arrowsize = "0.5"
+color = "cadetblue"
+fontname = "Arial"
+fontsize = "8.0"
+label = "..next"
+]
+"job2" -> "error"[
+arrowsize = "0.5"
+color = "cadetblue"
+constraint = "true"
+fontname = "Arial"
+fontsize = "8.0"
+style = "dotted"
+]
+"job3" -> "success"[
+arrowsize = "0.5"
+color = "cadetblue"
+fontname = "Arial"
+fontsize = "8.0"
+label = "..next"
+]
+"job3" -> "error"[
+arrowsize = "0.5"
+color = "cadetblue"
+constraint = "true"
+fontname = "Arial"
+fontsize = "8.0"
+style = "dotted"
+]
+}
