@@ -32,14 +32,14 @@ services:
       MYSQL_DATABASE: jobscheduler
 
   cluster_agent1:
-    build: docker_client
+    build: cluster_agent
     container_name: cluster_agent1
 
   cluster_agent2:
-    build: docker_client
+    build: cluster_agent
     container_name: cluster_agent2
 
   cluster_agent3:
-    build: docker_client
+    build: cluster_agent
     container_name: cluster_agent3
 
